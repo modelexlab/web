@@ -1,0 +1,64 @@
+---
+title: "Translation"
+author: "Modelex"
+date: "2023-10-12"
+categories: [NLP, text, translation, generation, deep learning]
+---
+
+![](images/MODELEX-2.png)
+
+# Opus French to English
+
+### model: transformer-align
+
+**API request**
+
+**Token**: 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
+
+```{python}
+import requests
+
+API_URL = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-fr-en"
+headers = {"Authorization": "Bearer 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"}
+
+def query(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.json()
+	
+```
+
+Translation of the following prompt:
+
+```         
+ROBERT T. KIYOSAKI a remis en question et changé la perception de l'argent de dizaines de millions de gens partout dans le monde. Avec des opinions qui vont souvent à l'encontre de la sagesse populaire, Robert est maintenant connu pour son franc-parler, son insolence et son audace. Il est considéré à l'échelle mondiale comme un défenseur passionné de l'éducation financière. --Ce texte fait référence à une édition épuisée ou non disponible de ce titre.
+```
+
+```{python}
+output = query({
+	"inputs": "ROBERT T. KIYOSAKI a remis en question et changé la perception de l'argent de dizaines de millions de gens partout dans le monde. Avec des opinions qui vont souvent à l'encontre de la sagesse populaire, Robert est maintenant connu pour son franc-parler, son insolence et son audace. Il est considéré à l'échelle mondiale comme un défenseur passionné de l'éducation financière. --Ce texte fait référence à une édition épuisée ou non disponible de ce titre.",
+})
+output
+```
+
+```         
+Ensemble de conceptions portant sur les principes des êtres et des choses, sur le rôle de l'homme dans l'univers, sur Dieu, sur l'histoire et, de façon générale, sur tous les grands problèmes de la métaphysique.
+```
+
+```{python}
+output = query({
+	"inputs": "Ensemble de conceptions portant sur les principes des êtres et des choses, sur le rôle de l'homme dans l'univers, sur Dieu, sur l'histoire et, de façon générale, sur tous les grands problèmes de la métaphysique.",
+})
+output
+```
+
+```         
+Les fanatiques de Disney devront se serrer un petit peu plus la ceinture s’ils veulent visiter les deux parcs à thèmes situés aux États-Unis, puisque l’entreprise a annoncé mercredi avoir augmenté les prix pour ses installations de Californie et de Floride.
+```
+
+```{python}
+output = query({
+	"inputs": "Les fanatiques de Disney devront se serrer un petit peu plus la ceinture s’ils veulent visiter les deux parcs à thèmes situés aux États-Unis, puisque l’entreprise a annoncé mercredi avoir augmenté les prix pour ses installations de Californie et de Floride.",
+})
+output
+
+```

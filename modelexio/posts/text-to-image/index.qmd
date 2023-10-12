@@ -1,0 +1,84 @@
+---
+title: "Text-to-image"
+author: "Modelex"
+date: "2023-10-12"
+categories: [NLP, text, image, generation, deep learning]
+---
+
+# **SD-XL 1.0-base Model Card**
+
+**Model type:** Diffusion-based text-to-image generative model
+
+**Make sure to upgrade diffusers to \>= 0.19.0:**
+
+```{python}
+!pip install diffusers --upgrade
+
+```
+
+**In addition make sure to install `transformers`, `safetensors`, `accelerate` as well as the invisible watermark:**
+
+```{python}
+!pip install invisible_watermark transformers accelerate safetensors
+```
+
+**Install torch:**
+
+```{python}
+!pip install torch
+```
+
+**Install io:**
+
+```{python}
+!pip install requires.io
+```
+
+**Inference API request:**
+
+**token**: *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*
+
+```{python}
+import requests
+API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
+headers = {"Authorization": "Bearer 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"}
+```
+
+Generate image with prompt:
+
+```         
+Astronaut riding a horse
+```
+
+```{python}
+def query(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.content
+image_bytes = query({
+	"inputs": "Astronaut riding a horse",
+})
+# You can access the image with PIL.Image for example
+import io
+from PIL import Image
+image = Image.open(io.BytesIO(image_bytes))
+image
+
+```
+
+```         
+Garfield on the moon
+```
+
+```{python}
+def query(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.content
+image_bytes = query({
+	"inputs": "Garfield on the moon",
+})
+# You can access the image with PIL.Image for example
+import io
+from PIL import Image
+image = Image.open(io.BytesIO(image_bytes))
+image
+```
